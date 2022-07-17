@@ -23,7 +23,7 @@
             <div class="submit">
                 <div class="form">
                     <label>Sheets URL</label>
-                    <input class="sheet" type="text" placeholder="doc.google.com/spreadsheets"/>
+                    <input id="input" class="sheet" type="text" placeholder="https://docs.google.com/spreadsheets/d/1gFzQr62oK6oNVfTGdutsSUFIlNUFgtLaKt7uFwLKuJs/edit#gid=0" value="https://docs.google.com/spreadsheets/d/1gFzQr62oK6oNVfTGdutsSUFIlNUFgtLaKt7uFwLKuJs/edit#gid=0"/>
                     <button value="0" id="button" onclick="optmize()">Submit</button>
                 </div>
             </div>
@@ -94,11 +94,17 @@
                 }
             }
             async function optmize() {
+                url = "https://docs.google.com/spreadsheets/d/1gFzQr62oK6oNVfTGdutsSUFIlNUFgtLaKt7uFwLKuJs/edit#gid=0"
+                if(document.getElementById("input").value.length > 15){
+                    url = document.getElementById("input").value
+                }
                 cleanTable()
                 
                 try {
-                    const response = await axios.get("http://127.0.0.1:5000/opt");
-                    result = response.data['Result']
+                    const response = await axios.post("https://still-fortress-79052.herokuapp.com/opt/sheets",
+                    {"sheet_url": url});
+
+                    result = response.data['result']
                     amount = response.data['amount']
                     for(item in result){
                         createBody('div','class','row',[item,result[item]['quantity'],result[item]["amount"]],'tbody')
