@@ -1,0 +1,96 @@
+.submit{
+    border-style: none;
+    border-radius: 10px;
+    background-image: linear-gradient(to right,white,var(--cor1));
+    padding: 1ch;
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.2);
+    
+}
+.submit label{
+    color: var(--cor1);
+    font-weight: bold;
+    font-size: 2.2ch;
+    margin-right: 5ch;
+}
+.submit input{
+    border-style: none;
+    border-radius: 10px;
+    margin: 0ch 5ch 0ch 5ch;
+    font-size: 2.2ch;
+    width: 50%;
+}
+.submit input:focus{
+    border-style: none;
+    border-width: 0px;
+}
+
+.submit button{
+    font-size: 2.2ch;
+    color: var(--cor3);
+    background-color: white;
+    border-radius: 10px;
+    border-color: var(--cor3);
+    width: 18%;
+    cursor: pointer;
+    margin-left: 5ch;
+}
+.submit button:hover{
+    transition-duration: 0.4s;
+    color: white;
+    background-color: var(--cor3);
+    box-shadow: 1px 1px var(--cor3);
+}
+.form{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    
+}
+.table{
+    border-radius: 10px;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    font-weight: bold;
+    box-shadow: 3px 3px rgba(0, 0, 0, 0.2);
+}
+.thead{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 10px;
+    background-image: linear-gradient(to right,white,var(--cor1));
+}
+.thead p{
+    margin: 0ch 5ch 0ch 5ch;
+    font-size: 18px;
+    padding: 1.6ch;
+    
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 10px;
+    background-image: linear-gradient(to right,white,var(--cor3));
+    
+    margin-top: 1.6ch;
+}
+.tbody p{
+    margin: 0ch 5ch 0ch 5ch;
+    font-size: 18px;
+    padding: 1.6ch;
+}
+.tfooter{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 10px;
+    background-image: linear-gradient(to right,white,var(--cor3));
+    font-size: 18px;
+    padding: 1.6ch;
+    margin-top: 2.2ch;
+}
+.tfooter p{
+    margin: 0ch 5ch 0ch 5ch;
+}

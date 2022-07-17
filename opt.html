@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, inicial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="./css/tb.css"/>
+        <title>Diet Optimization</title>
+        
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html"><img class="image-logo" src="./images/food_logo.png"/></a>
+                <a href="index.html">Diet Optimization</a>
+            </div>
+            <ul class="options">
+                <li><a href="https://docs.google.com/spreadsheets/d/1gFzQr62oK6oNVfTGdutsSUFIlNUFgtLaKt7uFwLKuJs/edit?usp=sharing" target="_blank">Get Data</a></li>
+            </ul>
+        </nav>
+        <section class="content">
+            <div class="submit">
+                <div class="form">
+                    <label>Sheets URL</label>
+                    <input class="sheet" type="text" placeholder="doc.google.com/spreadsheets"/>
+                    <button value="0" id="button" onclick="optmize()">Submit</button>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content">
+            <div class="table">
+                <div class="thead">
+                    <p>Food</p>
+                    <p>Quantity</p>
+                    <p>Amount</p>
+                </div>
+                <div class="tbody" id="tbody">
+                    <!--<div class="row">
+                        <p>Item1</p>
+                        <p>10</p>
+                        <p>R$200</p>
+                    </div>
+                    <div class="row">
+                        <p>Item3</p>
+                        <p>10</p>
+                        <p>R$200</p>
+                    </div>
+                    <div class="row">
+                        <p>Item3</p>
+                        <p>10</p>
+                        <p>R$200</p>
+                    </div>-->
+                </div>
+                <div class="tfooter">
+                    <p>Total</p>
+                    <p></p>
+                    <p id="total"></p>
+                </div>
+            </div>
+             
+        <footer>
+            <object data="./images/waves1.svg"></object>
+        </footer>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+            function createBody(element, attr, attr_name, content,father){
+                const el = document.createElement(element);
+                const p1 = document.createElement("p");
+                const p2 = document.createElement("p");
+                const p3 = document.createElement("p");
+                p1.textContent = content[0]
+                p2.textContent = content[1]
+                p3.textContent = content[2]
+
+                el.appendChild(p1)
+                el.appendChild(p2)
+                el.appendChild(p3)
+                
+                el.setAttribute(attr, attr_name);
+                const box = document.getElementById(father);
+                box.appendChild(el);
+            }
+            function cleanTable(){
+                try{
+                    rows = document.getElementsByClassName("row")
+                    while(rows){
+                        rows[0].remove()
+                    }
+                    document.getElementById("total").innerHTML = ""
+                }catch(error){
+                    console.log(error)
+                }
+            }
+            async function optmize() {
+                cleanTable()
+                
+                try {
+                    const response = await axios.get("http://127.0.0.1:5000/opt");
+                    result = response.data['Result']
+                    amount = response.data['amount']
+                    for(item in result){
+                        createBody('div','class','row',[item,result[item]['quantity'],result[item]["amount"]],'tbody')
+                    }
+                    document.getElementById('total').innerHTML = amount
+                    document.getElementById("button").value = 1
+                    
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        </script>
+    </body>
+    
+</html>
